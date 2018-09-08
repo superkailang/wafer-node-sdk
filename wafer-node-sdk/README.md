@@ -113,6 +113,17 @@ router.get('/user', validationMiddleware, ctx => {
 
 #### 图片上传
 
+文件上传功能模块
+#### 新增加文件保存服务器功能
+ const reader = fs.createReadStream(imageFile.path);
+        let filePath = savefilePath + `/${imageFile.originalFilename}`;
+         // 创建可写流
+        const PDFName = 'upload' + `/${imageFile.originalFilename}`;
+         const upStream = fs.createWriteStream(filePath);
+         // 可读流通过管道写入可写流
+         reader.pipe(upStream);
+         upStream.end();
+
 SDK 提供直接上传图片至腾讯云对象储存（COS）的接口，只需要将请求传入接口，即可自动上传文件到 COS 中，并返回数据：
 
 ```javascript
